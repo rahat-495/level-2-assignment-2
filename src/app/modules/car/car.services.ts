@@ -1,4 +1,5 @@
 
+import { Query } from "mongoose";
 import Car from "./car.interfaces"
 import CarsModel from "./car.models"
 
@@ -8,5 +9,30 @@ export const createCarService = async (data : Car) => {
         "message": "Car created successfully",
         "success": true,
         "data": result ,
+    }
+}
+
+export const getAllCarsService = async (searchTerm : string) => {
+    if(searchTerm){
+        const result = await CarsModel.find({
+            $or: [
+              { brand: { $regex: searchTerm, $options: "i" } },
+              { model: { $regex: searchTerm, $options: "i" } }, 
+              { category: { $regex: searchTerm, $options: "i" } }
+            ]
+        }) ;
+        return {
+            "message": "Cars retrieved successfully",
+            "status": true,
+            "data": result ,
+        }
+    }
+    else{
+        const result = await CarsModel.find() ;
+        return {
+            "message": "Cars retrieved successfully",
+            "status": true,
+            "data": result ,
+        }    
     }
 }
