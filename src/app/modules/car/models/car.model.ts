@@ -1,6 +1,6 @@
 
 import mongoose from "mongoose";
-import Car from "../interface/car.interface";
+import Car from "../interfaces/car.interface";
 
 const carSchema = new mongoose.Schema<Car>({
     brand : {
