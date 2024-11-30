@@ -1,7 +1,6 @@
 
 import mongoose from "mongoose";
-import Order from "../interfaces/order.interface";
-import CarsModel from "../../car/models/car.model";
+import Order from "./order.interfaces";
 
 const orderSchema = new mongoose.Schema<Order>({
     email : {

@@ -1,7 +1,7 @@
 
 import express, { Application, Request, Response } from "express";
 import cors from "cors" ;
-import { carRoutes } from "./app/modules/car/routes/car.route";
+import { carRoutes } from "./app/modules/car/car.routes";
 const app : Application = express() ;
 
 app.use(cors()) ;

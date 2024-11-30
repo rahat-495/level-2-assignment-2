@@ -1,6 +1,6 @@
 
 import mongoose from "mongoose";
-import Car from "../interfaces/car.interface";
+import Car from "./car.interfaces";
 
 const carSchema = new mongoose.Schema<Car>({
     brand : {
@@ -36,6 +36,8 @@ const carSchema = new mongoose.Schema<Car>({
         default : true ,
         type : Boolean ,
     },
+},{
+    timestamps : true
 })
 
 const CarsModel = mongoose.model("car" , carSchema) ;
