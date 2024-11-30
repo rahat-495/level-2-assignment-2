@@ -16,6 +16,12 @@ const createCar = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield (0, car_services_1.createCarService)(data);
     res.json(result);
 });
+const getAllCars = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { searchTerm } = req.query;
+    const result = yield (0, car_services_1.getAllCarsService)(searchTerm);
+    res.json(result);
+});
 exports.carControllers = {
     createCar,
+    getAllCars
 };
