@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllCarsService = exports.createCarService = void 0;
+exports.getSpecificCarService = exports.getAllCarsService = exports.createCarService = void 0;
 const car_models_1 = __importDefault(require("./car.models"));
 const createCarService = (data) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield car_models_1.default.create(data);
@@ -31,7 +31,7 @@ const getAllCarsService = (searchTerm) => __awaiter(void 0, void 0, void 0, func
                 { model: { $regex: searchTerm, $options: "i" } },
                 { category: { $regex: searchTerm, $options: "i" } }
             ]
-        });
+        }).select("-__v");
         return {
             "message": "Cars retrieved successfully",
             "status": true,
@@ -48,3 +48,12 @@ const getAllCarsService = (searchTerm) => __awaiter(void 0, void 0, void 0, func
     }
 });
 exports.getAllCarsService = getAllCarsService;
+const getSpecificCarService = (carId) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield car_models_1.default.findById(carId).select("-__v");
+    return {
+        "message": "Car retrieved successfully",
+        "status": true,
+        "data": result,
+    };
+});
+exports.getSpecificCarService = getSpecificCarService;

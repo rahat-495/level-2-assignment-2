@@ -9,4 +9,5 @@ const car_controllers_1 = require("./car.controllers");
 const router = express_1.default.Router();
 router.post('/', car_controllers_1.carControllers.createCar);
 router.get('/', car_controllers_1.carControllers.getAllCars);
+router.get('/:carId', car_controllers_1.carControllers.getSpecificCar);
 exports.carRoutes = router;

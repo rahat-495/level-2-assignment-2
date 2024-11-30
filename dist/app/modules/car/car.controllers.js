@@ -21,7 +21,13 @@ const getAllCars = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     const result = yield (0, car_services_1.getAllCarsService)(searchTerm);
     res.json(result);
 });
+const getSpecificCar = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { carId } = req.params;
+    const result = yield (0, car_services_1.getSpecificCarService)(carId);
+    res.json(result);
+});
 exports.carControllers = {
     createCar,
-    getAllCars
+    getAllCars,
+    getSpecificCar,
 };
