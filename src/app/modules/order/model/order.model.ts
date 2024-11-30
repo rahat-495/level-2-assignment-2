@@ -21,3 +21,6 @@ const orderSchema = new mongoose.Schema<Order>({
         type : Number ,
     },
 })
+
+const OrdersModel = mongoose.model('order' , orderSchema) ;
+export default OrdersModel ;
