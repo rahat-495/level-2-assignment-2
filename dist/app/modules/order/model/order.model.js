@@ -22,3 +22,5 @@ const orderSchema = new mongoose_1.default.Schema({
         type: Number,
     },
 });
+const OrdersModel = mongoose_1.default.model('order', orderSchema);
+exports.default = OrdersModel;
