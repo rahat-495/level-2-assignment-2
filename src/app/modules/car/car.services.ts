@@ -20,7 +20,7 @@ export const getAllCarsService = async (searchTerm : string) => {
               { model: { $regex: searchTerm, $options: "i" } }, 
               { category: { $regex: searchTerm, $options: "i" } }
             ]
-        }) ;
+        }).select("-__v") ;
         return {
             "message": "Cars retrieved successfully",
             "status": true,
@@ -34,5 +34,14 @@ export const getAllCarsService = async (searchTerm : string) => {
             "status": true,
             "data": result ,
         }    
+    }
+}
+
+export const getSpecificCarService = async (carId : string) => {
+    const result = await CarsModel.findById(carId).select("-__v") ;
+    return {
+        "message": "Car retrieved successfully",
+        "status": true,
+        "data": result ,
     }
 }
