@@ -1,7 +1,6 @@
 
 import { Request, Response } from "express"
 import { createCarService, getAllCarsService } from "./car.services";
-import { Query } from "mongoose";
 
 const createCar = async (req : Request , res : Response) => {
     const data = req.body ;
