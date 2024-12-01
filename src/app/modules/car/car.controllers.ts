@@ -1,6 +1,6 @@
 
 import { Request, Response } from "express"
-import { createCarService, getAllCarsService, getSpecificCarService, updateSpecificCarService } from "./car.services";
+import { createCarService, deleteSpecificCarService, getAllCarsService, getSpecificCarService, updateSpecificCarService } from "./car.services";
 
 const createCar = async (req : Request , res : Response) => {
     const data = req.body ;
@@ -27,9 +27,16 @@ const updateSpecificCar = async (req : Request , res : Response) => {
     res.json(result) ;
 }
 
+const deleteSpecificCar = async (req : Request , res : Response) => {
+    const {carId} = req.params;
+    const result = await deleteSpecificCarService(carId) ;
+    res.json(result) ;
+}
+
 export const carControllers = {
     createCar ,
     getAllCars ,
     getSpecificCar ,
     updateSpecificCar ,
+    deleteSpecificCar ,
 }

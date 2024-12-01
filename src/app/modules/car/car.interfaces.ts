@@ -8,6 +8,7 @@ interface Car {
     description : string ;
     quantity : number ;
     inStock : boolean ;
+    isDeleted : boolean ;
 }
 
 export default Car ;

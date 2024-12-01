@@ -36,6 +36,10 @@ const carSchema = new mongoose.Schema<Car>({
         default : true ,
         type : Boolean ,
     },
+    isDeleted : {
+        default : false ,
+        type : Boolean ,
+    },
 },{
     timestamps : true
 })
