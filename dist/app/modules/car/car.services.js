@@ -12,10 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateSpecificCarService = exports.getSpecificCarService = exports.getAllCarsService = exports.createCarService = void 0;
+exports.deleteSpecificCarService = exports.updateSpecificCarService = exports.getSpecificCarService = exports.getAllCarsService = exports.createCarService = void 0;
 const car_models_1 = __importDefault(require("./car.models"));
 const createCarService = (data) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield car_models_1.default.create(data);
+    const result = yield car_models_1.default.create(Object.assign(Object.assign({}, data), { isDeleted: false }));
     return {
         "message": "Car created successfully",
         "success": true,
@@ -26,6 +26,7 @@ exports.createCarService = createCarService;
 const getAllCarsService = (searchTerm) => __awaiter(void 0, void 0, void 0, function* () {
     if (searchTerm) {
         const result = yield car_models_1.default.find({
+            isDeleted: { $ne: true },
             $or: [
                 { brand: { $regex: searchTerm, $options: "i" } },
                 { model: { $regex: searchTerm, $options: "i" } },
@@ -39,7 +40,7 @@ const getAllCarsService = (searchTerm) => __awaiter(void 0, void 0, void 0, func
         };
     }
     else {
-        const result = yield car_models_1.default.find();
+        const result = yield car_models_1.default.find({ isDeleted: { $ne: true } });
         return {
             "message": "Cars retrieved successfully",
             "status": true,
@@ -49,7 +50,7 @@ const getAllCarsService = (searchTerm) => __awaiter(void 0, void 0, void 0, func
 });
 exports.getAllCarsService = getAllCarsService;
 const getSpecificCarService = (carId) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield car_models_1.default.findById(carId).select("-__v");
+    const result = yield car_models_1.default.findOne({ $and: [{ _id: carId }, { isDeleted: { $ne: true } }] }).select("-__v");
     return {
         "message": "Car retrieved successfully",
         "status": true,
@@ -69,3 +70,14 @@ const updateSpecificCarService = (carId, data) => __awaiter(void 0, void 0, void
     }
 });
 exports.updateSpecificCarService = updateSpecificCarService;
+const deleteSpecificCarService = (carId) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield car_models_1.default.updateOne({ _id: carId }, { $set: { isDeleted: true } });
+    if (result.modifiedCount > 0) {
+        return {
+            "message": "Car deleted successfully",
+            "status": true,
+            "data": {}
+        };
+    }
+});
+exports.deleteSpecificCarService = deleteSpecificCarService;

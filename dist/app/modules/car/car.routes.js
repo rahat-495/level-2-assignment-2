@@ -11,4 +11,5 @@ router.post('/', car_controllers_1.carControllers.createCar);
 router.get('/', car_controllers_1.carControllers.getAllCars);
 router.get('/:carId', car_controllers_1.carControllers.getSpecificCar);
 router.put('/:carId', car_controllers_1.carControllers.updateSpecificCar);
+router.delete('/:carId', car_controllers_1.carControllers.deleteSpecificCar);
 exports.carRoutes = router;

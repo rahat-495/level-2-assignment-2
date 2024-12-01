@@ -32,9 +32,15 @@ const updateSpecificCar = (req, res) => __awaiter(void 0, void 0, void 0, functi
     const result = yield (0, car_services_1.updateSpecificCarService)(carId, data);
     res.json(result);
 });
+const deleteSpecificCar = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { carId } = req.params;
+    const result = yield (0, car_services_1.deleteSpecificCarService)(carId);
+    res.json(result);
+});
 exports.carControllers = {
     createCar,
     getAllCars,
     getSpecificCar,
     updateSpecificCar,
+    deleteSpecificCar,
 };
