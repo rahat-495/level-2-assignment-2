@@ -1,5 +1,4 @@
 
-import { Query } from "mongoose";
 import Car from "./car.interfaces"
 import CarsModel from "./car.models"
 
