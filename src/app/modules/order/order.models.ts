@@ -1,6 +1,7 @@
 
 import mongoose from "mongoose";
 import Order from "./order.interfaces";
+import CarsModel from "../car/car.models";
 
 const orderSchema = new mongoose.Schema<Order>({
     email : {
@@ -19,6 +20,20 @@ const orderSchema = new mongoose.Schema<Order>({
     totalPrice : {
         type : Number ,
     },
+},{
+    timestamps : true
+})
+
+orderSchema.pre('save' , async function (next){
+    const order = this ;
+    const car = await CarsModel.findById(order.car) ;
+
+    if(!car){
+        return next(new Error("Car not found!"));
+    }
+
+    order.totalPrice = order.quantity * car?.price ;
+    next() ;
 })
 
 const OrdersModel = mongoose.model('order' , orderSchema) ;
