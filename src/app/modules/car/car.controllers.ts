@@ -21,7 +21,7 @@ const getSpecificCar = async (req : Request , res : Response) => {
 }
 
 const updateSpecificCar = async (req : Request , res : Response) => {
-    const data : string = req.body ;
+    const data : object = req.body ;
     const {carId} = req.params;
     const result = await updateSpecificCarService(carId , data) ;
     res.json(result) ;

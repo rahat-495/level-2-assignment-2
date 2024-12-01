@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getSpecificCarService = exports.getAllCarsService = exports.createCarService = void 0;
+exports.updateSpecificCarService = exports.getSpecificCarService = exports.getAllCarsService = exports.createCarService = void 0;
 const car_models_1 = __importDefault(require("./car.models"));
 const createCarService = (data) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield car_models_1.default.create(data);
@@ -57,3 +57,15 @@ const getSpecificCarService = (carId) => __awaiter(void 0, void 0, void 0, funct
     };
 });
 exports.getSpecificCarService = getSpecificCarService;
+const updateSpecificCarService = (carId, data) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield car_models_1.default.updateOne({ _id: carId }, { $set: data });
+    if ((result === null || result === void 0 ? void 0 : result.modifiedCount) > 0) {
+        const car = yield car_models_1.default.findById(carId).select("-__v");
+        return {
+            "message": "Car updated successfully",
+            "status": true,
+            "data": car,
+        };
+    }
+});
+exports.updateSpecificCarService = updateSpecificCarService;
