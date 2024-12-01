@@ -45,3 +45,15 @@ export const getSpecificCarService = async (carId : string) => {
         "data": result ,
     }
 }
+
+export const updateSpecificCarService = async (carId : string , data : object) => {
+    const result = await CarsModel.updateOne({_id : carId} , { $set : data }) ;
+    if(result?.modifiedCount > 0){
+        const car = await CarsModel.findById(carId).select("-__v") ;
+        return {
+            "message": "Car updated successfully",
+            "status": true,
+            "data": car ,
+        }
+    }
+}
