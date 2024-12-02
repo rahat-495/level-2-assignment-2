@@ -8,8 +8,8 @@ const app : Application = express() ;
 
 app.use(cors()) ;
 app.use(express.json()) ;
-app.use('/api/cars' , carRoutes) ;
-app.use('/api/orders' , orderRoutes) ;
+app.use('/' , carRoutes) ;
+app.use('/' , orderRoutes) ;
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) : any => {
 
