@@ -3,7 +3,6 @@ import { Request, Response } from "express" ;
 import { createOrderService, getAllRevenueService } from "./order.services";
 import CarsModel from "../car/car.models";
 import Order from "./order.interfaces";
-import OrdersModel from "./order.models";
 
 const createOrder = async (req : Request , res : Response) => {
     const data : Order = req.body ;
