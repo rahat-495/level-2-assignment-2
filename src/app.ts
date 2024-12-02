@@ -11,19 +11,42 @@ app.use(express.json()) ;
 app.use('/api/cars' , carRoutes) ;
 app.use('/api/orders' , orderRoutes) ;
 
-app.use((err : Error , req : Request , res : Response , next : NextFunction) : any => {
-    if(err){
-        const errorResponse = {
-            message: err.message || "Something went wrong",
-            success: false,
-            error: {
-                name: err.name || "Error",
-            },
-            stack: err.stack ,
+app.use((err: any, req: Request, res: Response, next: NextFunction) : any => {
+
+    if (err.name === "ValidationError") {
+
+      const customErrors = Object.keys(err.errors).reduce((acc: any, key) => {
+        const { message, kind, path, value } = err.errors[key];
+        acc[key] = {
+          message: message,
+          name: err.errors[key].name,
+          properties: err.errors[key].properties,
+          kind: kind,
+          path: path,
+          value: value,
         };
-        return res.status(500).json(errorResponse) ;
+        return acc;
+      }, {});
+  
+      return res.status(400).json({
+        message: "Validation failed",
+        success: false,
+        error: {
+          name: err.name,
+          errors: customErrors,
+        },
+        stack: err.stack, 
+      });
+
     }
-})
+  
+    res.status(500).json({
+      message: "Something went wrong",
+      success: false,
+      error: err.message,
+    });
+
+});
 
 app.use('/' , (req : Request , res : Response) => {
     res.json({message : "Server are connected !" , success : true}) ;
