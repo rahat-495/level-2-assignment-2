@@ -13,17 +13,34 @@ app.use(express_1.default.json());
 app.use('/api/cars', car_routes_1.carRoutes);
 app.use('/api/orders', order_routes_1.orderRoutes);
 app.use((err, req, res, next) => {
-    if (err) {
-        const errorResponse = {
-            message: err.message || "Something went wrong",
+    if (err.name === "ValidationError") {
+        const customErrors = Object.keys(err.errors).reduce((acc, key) => {
+            const { message, kind, path, value } = err.errors[key];
+            acc[key] = {
+                message: message,
+                name: err.errors[key].name,
+                properties: err.errors[key].properties,
+                kind: kind,
+                path: path,
+                value: value,
+            };
+            return acc;
+        }, {});
+        return res.status(400).json({
+            message: "Validation failed",
             success: false,
             error: {
-                name: err.name || "Error",
+                name: err.name,
+                errors: customErrors,
             },
             stack: err.stack,
-        };
-        return res.status(500).json(errorResponse);
+        });
     }
+    res.status(500).json({
+        message: "Something went wrong",
+        success: false,
+        error: err.message,
+    });
 });
 app.use('/', (req, res) => {
     res.json({ message: "Server are connected !", success: true });
