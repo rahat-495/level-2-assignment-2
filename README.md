@@ -23,26 +23,29 @@ Follow these instructions to set up the project locally.
 Clone this repository to your local machine:
 
 Copy code
-git clone https://github.com/your-username/car-store-b4a2v3.git
+
+```git clone https://github.com/rahat-495/level-2-assignment-2.git```
+
 2. Install Dependencies
 Navigate to the project directory and install the required npm packages:
 
 bash
-Copy code
+Copy code <br>
 cd car-store-b4a2v3
-npm install
+npm install mongoose cors express dotenv ts-node-dev
+
 3. Set Up Environment Variables
 Create a .env file in the root of the project and add the following environment variables:
 
 env
 Copy code
-MONGO_URI=mongodb://localhost:27017/carstore
-PORT=3000
-NODE_ENV=development  # Change to 'production' in a live environment
+PORT=5555
+DATABASE_URL=yourUrl
+
 4. Run the Application Locally
 Start the application locally:
 
 bash
 Copy code
-npm run dev
-The app will be running at http://localhost:3000.
+npx ts-node-dev --respawn --transpile-only src/server.ts
+The app will be running at http://localhost:5555.
