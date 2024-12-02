@@ -12,30 +12,75 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.carControllers = void 0;
 const car_services_1 = require("./car.services");
 const createCar = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const data = req.body;
-    const result = yield (0, car_services_1.createCarService)(data);
-    res.json(result);
+    try {
+        const data = req.body;
+        const result = yield (0, car_services_1.createCarService)(data);
+        res.json(result);
+    }
+    catch (error) {
+        res.status(500).json({
+            "message": "Validation failed",
+            "success": false,
+            error: error,
+        });
+    }
 });
 const getAllCars = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { searchTerm } = req.query;
-    const result = yield (0, car_services_1.getAllCarsService)(searchTerm);
-    res.json(result);
+    try {
+        const { searchTerm } = req.query;
+        const result = yield (0, car_services_1.getAllCarsService)(searchTerm);
+        res.json(result);
+    }
+    catch (error) {
+        res.status(500).json({
+            "message": "Validation failed",
+            "success": false,
+            error: error,
+        });
+    }
 });
 const getSpecificCar = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { carId } = req.params;
-    const result = yield (0, car_services_1.getSpecificCarService)(carId);
-    res.json(result);
+    try {
+        const { carId } = req.params;
+        const result = yield (0, car_services_1.getSpecificCarService)(carId);
+        res.json(result);
+    }
+    catch (error) {
+        res.status(500).json({
+            "message": "Validation failed",
+            "success": false,
+            error: error,
+        });
+    }
 });
 const updateSpecificCar = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const data = req.body;
-    const { carId } = req.params;
-    const result = yield (0, car_services_1.updateSpecificCarService)(carId, data);
-    res.json(result);
+    try {
+        const data = req.body;
+        const { carId } = req.params;
+        const result = yield (0, car_services_1.updateSpecificCarService)(carId, data);
+        res.json(result);
+    }
+    catch (error) {
+        res.status(500).json({
+            "message": "Validation failed",
+            "success": false,
+            error: error,
+        });
+    }
 });
 const deleteSpecificCar = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { carId } = req.params;
-    const result = yield (0, car_services_1.deleteSpecificCarService)(carId);
-    res.json(result);
+    try {
+        const { carId } = req.params;
+        const result = yield (0, car_services_1.deleteSpecificCarService)(carId);
+        res.json(result);
+    }
+    catch (error) {
+        res.status(500).json({
+            "message": "Validation failed",
+            "success": false,
+            error: error,
+        });
+    }
 });
 exports.carControllers = {
     createCar,

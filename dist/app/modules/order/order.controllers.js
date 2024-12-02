@@ -16,23 +16,41 @@ exports.orderControllers = void 0;
 const order_services_1 = require("./order.services");
 const car_models_1 = __importDefault(require("../car/car.models"));
 const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const data = req.body;
-    const car = yield car_models_1.default.findById(data === null || data === void 0 ? void 0 : data.car);
-    if ((car === null || car === void 0 ? void 0 : car.quantity) > 0) {
-        const result = yield (0, order_services_1.createOrderService)(data);
-        res.json(result);
+    try {
+        const data = req.body;
+        const car = yield car_models_1.default.findById(data === null || data === void 0 ? void 0 : data.car);
+        if ((car === null || car === void 0 ? void 0 : car.quantity) > 0) {
+            const result = yield (0, order_services_1.createOrderService)(data);
+            res.json(result);
+        }
+        else {
+            yield car_models_1.default.updateOne({ _id: car === null || car === void 0 ? void 0 : car._id }, { $set: { inStock: false } });
+            res.status(500).json({
+                "message": "Insufficient stock available for the requested quantity!",
+                "status": false,
+            });
+        }
     }
-    else {
-        yield car_models_1.default.updateOne({ _id: car === null || car === void 0 ? void 0 : car._id }, { $set: { inStock: false } });
+    catch (error) {
         res.status(500).json({
-            "message": "Insufficient stock available for the requested quantity!",
-            "status": false,
+            "message": "Validation failed",
+            "success": false,
+            error: error,
         });
     }
 });
 const getAllRevenue = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield (0, order_services_1.getAllRevenueService)();
-    res.json(result);
+    try {
+        const result = yield (0, order_services_1.getAllRevenueService)();
+        res.json(result);
+    }
+    catch (error) {
+        res.status(500).json({
+            "message": "Validation failed",
+            "success": false,
+            error: error,
+        });
+    }
 });
 exports.orderControllers = {
     createOrder,
