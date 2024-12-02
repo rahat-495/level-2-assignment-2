@@ -19,7 +19,7 @@ const carSchema = new mongoose_1.default.Schema({
     },
     price: {
         type: Number,
-        required: [true, "Plz enter price of the car !"]
+        required: [true, "Plz enter price of the car !"],
     },
     category: {
         type: String,

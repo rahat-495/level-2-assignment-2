@@ -12,6 +12,19 @@ app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use('/api/cars', car_routes_1.carRoutes);
 app.use('/api/orders', order_routes_1.orderRoutes);
+app.use((err, req, res, next) => {
+    if (err) {
+        const errorResponse = {
+            message: err.message || "Something went wrong",
+            success: false,
+            error: {
+                name: err.name || "Error",
+            },
+            stack: err.stack,
+        };
+        return res.status(500).json(errorResponse);
+    }
+});
 app.use('/', (req, res) => {
     res.json({ message: "Server are connected !", success: true });
 });
