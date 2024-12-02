@@ -1,22 +1,22 @@
-Features
+### Features
 Car Inventory Management: Add, update, delete, and view available cars in the store. <br>
 Order Management: Place orders for cars, view order details, and calculate total prices. <br>
 Stock Control: Manage the available quantity of each car and track if the car is in stock. <br>
 CRUD Operations: Create, read, update, and delete operations for both cars and orders. <br>
 Data Integrity: Mongoose validation ensures that data meets predefined rules and constraints. <br>
 
-- Tech Stack
-Backend: Express.js .
+### Tech Stack
+- Backend: Express.js .
 
-Database: MongoDB, Mongoose .
+- Database: MongoDB, Mongoose .
 
-Language: TypeScript .
+- Language: TypeScript .
 
-Validation: Mongoose Schema Validation .
+- Validation: Mongoose Schema Validation .
 
-API Documentation: REST API .
+- API Documentation: REST API .
 
-Project Setup
+### Project Setup
 Follow these instructions to set up the project locally.
 
 1. Clone the Repository
