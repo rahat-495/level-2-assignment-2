@@ -10,8 +10,8 @@ const order_routes_1 = require("./app/modules/order/order.routes");
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
-app.use('/api/cars', car_routes_1.carRoutes);
-app.use('/api/orders', order_routes_1.orderRoutes);
+app.use('/', car_routes_1.carRoutes);
+app.use('/', order_routes_1.orderRoutes);
 app.use((err, req, res, next) => {
     if (err.name === "ValidationError") {
         const customErrors = Object.keys(err.errors).reduce((acc, key) => {
