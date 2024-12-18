@@ -5,7 +5,7 @@ const zod_1 = require("zod");
 exports.createCarValidationSchema = zod_1.z.object({
     body: zod_1.z.object({
         brand: zod_1.z.string({
-            required_error: "Please enter the brand name!",
+            required_error: "Please enter the brand name!", invalid_type_error: "plz enter valid brand"
         }),
         model: zod_1.z.string({
             required_error: "Please enter the model!",
