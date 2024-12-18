@@ -4,7 +4,7 @@ import { z } from "zod"
 export const createCarValidationSchema = z.object({
     body: z.object({
         brand: z.string({
-            required_error: "Please enter the brand name!",
+            required_error: "Please enter the brand name!", invalid_type_error : "plz enter valid brand"
         }),
         model: z.string({
             required_error: "Please enter the model!",
