@@ -8,8 +8,8 @@ const app : Application = express() ;
 
 app.use(cors()) ;
 app.use(express.json()) ;
-app.use('/' , carRoutes) ;
-app.use('/' , orderRoutes) ;
+app.use('/api' , carRoutes) ;
+app.use('/api' , orderRoutes) ;
 
 app.use('/' , (req : Request , res : Response) => {
     res.json({message : "Server are connected !" , success : true}) ;
